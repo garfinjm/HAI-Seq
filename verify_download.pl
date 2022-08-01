@@ -9,15 +9,16 @@ use Getopt::Std;
 
 # File:			verify_download.pl
 # Date created:		02 February, 2022
-# Date modified:	24 March, 2022
+# Date modified:	01 August, 2022
 # Author:		Eliot Stanton (eliot.stanton@state.mn.us)
+# Maintainer:		Jake Garfin (jake.garfin@state.mn.us)
 # Description:		Coordinates downloading FASTQ files from SRA for 
 #			verifying HAI_QC pipeline.
 
 # --------------------------------------------------------------------------- #
 
 # Define variables used in this script:
-my $var_partition	= "small";
+my $var_partition	= "msismall";
 my $var_threads		= 4;
 my $dir_downloads	= "downloads";
 my $dir_downsampled	= "downsampled";
@@ -115,7 +116,7 @@ for ( my $i = 0; $i < scalar@array_SRR; $i++ ) {
 
 	print "$i: $var_SRR\n";
 
-	system ( "sbatch -p $var_partition --cpus-per-task=$var_threads $var_path\/download.sh $var_SRR $var_threads $var_proportion $dir_downloads $dir_downsampled");
+	system ( "sbatch -M agate -p $var_partition --cpus-per-task=$var_threads $var_path\/download.sh $var_SRR $var_threads $var_proportion $dir_downloads $dir_downsampled");
 
 #	last if $i > 1;
 
