@@ -3,6 +3,7 @@
 #SBATCH --mem=38g
 #SBATCH --tmp=48g
 
+
 # --------------------------------------------------------------------------- #
 
 ACCESSION=$1
@@ -39,12 +40,40 @@ fi
 
 # --------------------------------------------------------------------------- #
 
-time staphb-tk \
-	--docker_config $CONFIG \
+#time staphb-tk \
+#	--docker_config $CONFIG \
+#	kraken2 \
+#	--db $KRAKEN_DB \
+#	--threads $THREADS \
+#	--output $DIR_OUT/$ACCESSION.kraken \
+#	--use-names \
+#	--report $KRAKEN_REPORT \
+#	--paired $FASTQ9 $FASTQ10
+
+workdir=$(realpath $(pwd))
+echo "bind "
+echo $workdir
+echo "kraken db" $KRAKEN_DB
+echo "output " $DIR_OUT"/"$ACCESSION".kraken"
+echo "report " $KRAKEN_REPORT
+echo "fastqs " $FASTQ9 $FASTQ10
+
+echo "working in " 
+pwd
+directory=$(pwd)
+echo "directory " $directory
+
+
+singularity \
+	exec \
+	-B ${workdir}:${workdir} \
+	-B ${KRAKEN_DB}:${KRAKEN_DB} \
+	--pwd ${workdir} \
+	/home/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-kraken2-2.1.2-no-db.sif \
 	kraken2 \
 	--db $KRAKEN_DB \
 	--threads $THREADS \
-	--output $DIR_OUT/$ACCESSION.kraken \
+	--output ${DIR_OUT}/${ACCESSION}.kraken \
 	--use-names \
 	--report $KRAKEN_REPORT \
 	--paired $FASTQ9 $FASTQ10

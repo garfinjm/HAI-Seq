@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time=8:00:01
+#SBATCH --time=2:00:01
 #SBATCH --ntasks=1
 #SBATCH --mem=2g
 #SBATCH --tmp=2g
@@ -15,23 +15,25 @@ SPADES_FASTA=$8
 
 # Test for presence of $FASTQ9 and $FASTQ10:
 if [[ ! -f $FASTQ9 ]]; then
-        echo "ERROR: $FASTQ9 not found! Exiting." exit
+        echo "ERROR: $FASTQ9 not found! Exiting."
 fi
 
 if [[ ! -f $FASTQ10 ]]; then
-        echo "ERROR: $FASTQ10 not found! Exiting."; exit
+        echo "ERROR: $FASTQ10 not found! Exiting." 
 fi
 
 # Test for presence of $KRAKEN_REPORT:
 if [[ ! -e $KRAKEN_REPORT ]]; then
-        echo "ERROR: $KRAKEN_REPORT not found! Exiting"; exit
+        echo "ERROR: $KRAKEN_REPORT not found! Exiting"
 fi
 
 # Test for presence of $SPADES_FASTA:
 if [[ ! -f $SPADES_FASTA ]]; then
-        echo "ERROR: $SPADES_FASTA not found! Exiting"; exit
+        echo "ERROR: $SPADES_FASTA not found! Exiting"
 fi
 
+echo "Starting script"
+echo $SCRIPT_PATH"/analysis.pl "$ACCESSION" "$DIR_IN" "$DIR_OUT
 $SCRIPT_PATH/analysis.pl $ACCESSION $DIR_IN $DIR_OUT
 
 

@@ -18,7 +18,7 @@ use Getopt::Std;
 # --------------------------------------------------------------------------- #
 
 # Define variables used in this script:
-my $var_partition	= "msismall";
+my $var_partition	= "agsmall";
 my $var_threads		= 4;
 my $dir_downloads	= "downloads";
 my $dir_downsampled	= "downsampled";
@@ -116,7 +116,7 @@ for ( my $i = 0; $i < scalar@array_SRR; $i++ ) {
 
 	print "$i: $var_SRR\n";
 
-	system ( "sbatch -M agate -p $var_partition --cpus-per-task=$var_threads $var_path\/download.sh $var_SRR $var_threads $var_proportion $dir_downloads $dir_downsampled");
+	system ( "sbatch -p $var_partition --cpus-per-task=$var_threads $var_path\/download.sh $var_SRR $var_threads $var_proportion $dir_downloads $dir_downsampled");
 
 #	last if $i > 1;
 

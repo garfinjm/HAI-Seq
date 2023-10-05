@@ -116,15 +116,14 @@ for ( my $i = 0; $i < scalar @array_out; $i++ ) {
         print "\n$i: $var_ID:\n";
 
 	print "\tsbatch \\
-		-M agate
-		-p msismall \\
+		-p agsmall \\
 		--output=$dir_out/$var_ID/$var_ID\-slurm.out \\
 		$var_submit_sh \\
 		$dir_in \\
 		$var_ID \\
 		$dir_out\n";
 
-	system ("sbatch --mail-type=END --mail-type=FAIL --mail-user=$var_email -M agate -p msismall --output=$dir_out/$var_ID/$var_ID\-slurm.out $var_submit_sh $dir_in $var_ID $dir_out");
+	system ("sbatch --mail-type=END --mail-type=FAIL --mail-user=$var_email -p agsmall --output=$dir_out/$var_ID/$var_ID\-slurm.out $var_submit_sh $dir_in $var_ID $dir_out");
 
 	sleep 1;
 

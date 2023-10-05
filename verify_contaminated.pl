@@ -9,6 +9,7 @@ use Getopt::Std;
 
 # File:         verify_contaminated.pl
 # Date created: 02 February, 2022
+# Date modified:	01 August, 2022
 # Author:       Eliot Stanton (eliot.stanton@state.mn.us)
 # Maintainer:   Jake Garfin (jake.garfin@state.mn.us)
 # Description:  Create synthetic contaminated files.
@@ -16,7 +17,7 @@ use Getopt::Std;
 # --------------------------------------------------------------------------- #
 
 # Define variables used in this script:
-my $var_partition       = "small";
+my $var_partition       = "agsmall";
 my $var_threads         = 12;
 my $var_proportion      = 50;
 my $dir_downloads	= "downloads";
@@ -98,7 +99,7 @@ for ( my $i = 0; $i < scalar@array_SRR; $i++ ) {
 
 		my $var_contaminated_sh	= "$var_path/contaminated.sh";
 
-		system ( "sbatch -M agate -p $var_partition --cpus-per-task=$var_threads $var_contaminated_sh $var_SRR1 $var_SRR2 $var_threads $var_proportion $dir_downloads $dir_contaminated" );
+		system ( "sbatch -p $var_partition --cpus-per-task=$var_threads $var_contaminated_sh $var_SRR1 $var_SRR2 $var_threads $var_proportion $dir_downloads $dir_contaminated" );
 
 #		last if $i > 1;
 

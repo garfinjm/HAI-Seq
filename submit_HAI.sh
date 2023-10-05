@@ -24,7 +24,7 @@ module load sbtk/1.3.2
 
 # Set location of the HAI_QC directory and scripts:
 HAI_PATH="/home/mdh/shared/HAI_QC"
-SCRIPT_PATH="/home/mdh/shared/software_modules/HAI_QC/1.1"
+SCRIPT_PATH="/home/mdh/shared/software_modules/HAI_QC/1.2"
 
 HAI_PATH=`realpath $HAI_PATH`
 SCRIPT_PATH=`realpath $SCRIPT_PATH`
@@ -40,8 +40,10 @@ DIR_IN=`realpath $DIR_IN`
 DIR_OUT=`realpath $DIR_OUT`
 
 # Define additional arguments that may need to be changed in future:
+# Changed kraken DB to new location on MSI following Oct '23 MSI Maintenance
+# /panfs/roc/msisoft/kraken/kraken_db > /common/software/install/migrated/kraken/kraken_db
 THREADS=8
-KRAKEN_DB="/panfs/roc/msisoft/kraken/kraken_db"
+KRAKEN_DB="/common/software/install/migrated/kraken/kraken_db"
 
 # Define variable for error reporting:
 VAR_ERROR=0
@@ -180,7 +182,8 @@ chmod 770 -R $DIR_IN
 exec 1> >(tee $DIR_OUT2/$ACCESSION-bash.out)
 
 # Print file details to command line:
-printf "\nVERSION:\t1.1\n"
+printf "\nSCRIPT:\tsubmit_HAI.sh\n"
+printf "\nVERSION:\t1.2\n"
 printf "ACCESSION:\t$ACCESSION\n"
 printf "OUTPUT:\t\t$DIR_OUT2\n"
 printf "FASTQ1:\t\t$FASTQ1\n"
@@ -190,15 +193,14 @@ printf "phiX: \t\t$PHIX\n\n"
 #: <<'END'
 
 # Create files with md5 checksum for FASTQ files:
-md5sum $FASTQ1 > $DIR_OUT2/$ACCESSION\_R1.fastq.gz.md5  
+md5sum $FASTQ1 > $DIR_OUT2/$ACCESSION\_R1.fastq.gz.md5
 md5sum $FASTQ2 > $DIR_OUT2/$ACCESSION\_R2.fastq.gz.md5
 
 # --------------------------------------------------------------------------- #
 
 # Submit the initial job trimming and filtering reads:
 JOBID1=$(sbatch \
-        -M agate
-        -p msismall \
+        -p agsmall \
         --parsable \
         --job-name="trim-filter-$ACCESSION" \
         --output="$DIR_OUT2/$ACCESSION-trim-filter.out" \
@@ -218,8 +220,7 @@ printf "\t- Submitted job $JOBID1 to trim and filter reads using Trimmomatic and
 
 # Identify species using Kraken2:
 JOBID2=$(sbatch \
-	-M agate
-	-p msismall \
+	-p agsmall \
 	--parsable \
 	--job-name="kraken2-$ACCESSION" \
 	--output="$DIR_OUT2/$ACCESSION-kraken2.out" \
@@ -234,8 +235,7 @@ printf "\t- Submitted job $JOBID2 to run species identification using Kraken2\n"
 
 # Produce an assembly using SPAdes:
 JOBID3=$(sbatch \
-        -M agate
-        -p msismall \
+        -p agsmall \
         --parsable \
         --job-name="spades-$ACCESSION" \
         --output="$DIR_OUT2/$ACCESSION-spades.out" \
@@ -249,8 +249,7 @@ printf "\t- Submitted job $JOBID3 to produce genome assembly using SPAdes\n"
 
 # Run MLST on SPAdes assembly:
 JOBID4=$(sbatch \
-	-M agate
-	-p msismall \
+	-p agsmall \
 	--parsable \
 	--job-name="MLST-$ACCESSION" \
 	--output="$DIR_OUT2/$ACCESSION-mlst.out" \
@@ -269,9 +268,10 @@ printf "\n"
 # use srun if running interactively within terminal:
 if [ -n "$SLURM_JOB_ID" ]
 then
+  echo "Running analysis as a job"
+
 	sbatch \
-		-M agate
-		-p msismall \
+		-p agsmall \
 		--dependency=afterok:$JOBID2:$JOBID3 \
 		--job-name="analysis-$ACCESSION" \
 		--output="$DIR_OUT2/$ACCESSION-analysis.out" \
@@ -288,6 +288,7 @@ then
 	SPADES_TRIMMED=`realpath $SPADES_TRIMMED`
 
 else
+	echo "Running analysis interactively"
 	srun \
 		--dependency=afterok:$JOBID2:$JOBID3 \
 		--job-name="analysis-$ACCESSION" \
