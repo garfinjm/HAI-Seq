@@ -42,7 +42,7 @@
         "tag": "latest"
      },
      "bbtools": {
-        "image": "/home/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-bbtools-38.76.sif",
+        "image": "/projects/standard/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-bbtools-38.76.sif",
         "tag": "38.76"
      },
      "bcftools": {
@@ -126,7 +126,7 @@
         "tag": "latest"
      },
      "kraken2": {
-        "image": "/home/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-kraken2-2.1.2-no-db.sif",
+        "image": "/projects/standard/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-kraken2-2.1.2-no-db.sif",
         "tag": "2.1.2-no-db"
      },
      "ksnp3": {
@@ -162,7 +162,7 @@
          "tag": "latest"
       },
       "mlst" : {
-         "image": "/home/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-mlst-2.19.0.sif",
+         "image": "/projects/standard/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-mlst-2.19.0.sif",
          "tag": "2.19.0"
       },
       "mugsy": {
@@ -202,7 +202,7 @@
          "tag": "latest"
       },
       "quast": {
-         "image": "/home/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-quast-5.0.2.sif",
+         "image": "/projects/standard/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-quast-5.0.2.sif",
          "tag": "5.0.2"
       },
       "racon": {
@@ -278,7 +278,7 @@
          "tag": "latest"
       },
     "spades": {
-       "image": "/home/mdh/shared/software_modules/HAI_QC/1.2/singularity/spades-3.15.2.sif",
+       "image": "/projects/standard/mdh/shared/software_modules/HAI_QC/1.2/singularity/spades-3.15.2.sif",
        "tag": "3.15.2"
       },
       "sra-toolkit": {
@@ -294,7 +294,7 @@
          "tag": "latest"
       },
       "trimmomatic": {
-         "image": "/home/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-trimmomatic-0.39.sif",
+         "image": "/projects/standard/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-trimmomatic-0.39.sif",
          "tag": "0.39"
       },
       "unicycler": {

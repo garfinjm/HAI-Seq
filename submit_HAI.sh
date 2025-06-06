@@ -17,14 +17,14 @@
 # --------------------------------------------------------------------------- #
 
 # Add path for MDH modules:
-export MODULEPATH=/home/mdh/shared/software_modules/modulefiles:$MODULEPATH
+export MODULEPATH=/projects/standard/mdh/shared/software_modules/modulefiles:$MODULEPATH
 
 # Load StaphB-toolkit module:
 module load sbtk/1.3.2
 
 # Set location of the HAI_QC directory and scripts:
-HAI_PATH="/home/mdh/shared/HAI_QC"
-SCRIPT_PATH="/home/mdh/shared/software_modules/HAI_QC/1.2"
+HAI_PATH="/projects/standard/mdh/shared/HAI_QC"
+SCRIPT_PATH="/projects/standard/mdh/shared/software_modules/HAI_QC/1.2"
 
 HAI_PATH=`realpath $HAI_PATH`
 SCRIPT_PATH=`realpath $SCRIPT_PATH`

@@ -1,1 +1,8 @@
 ./singularity/*.sif
+singularity/spades-3.15.2.sif
+singularity/staphb-bbtools-38.76.sif
+singularity/staphb-bbtools-38.86.sif
+singularity/staphb-kraken2-2.1.2-no-db.sif
+singularity/staphb-mlst-2.19.0.sif
+singularity/staphb-quast-5.0.2.sif
+singularity/staphb-trimmomatic-0.39.sif

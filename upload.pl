@@ -21,8 +21,8 @@ my $dir_results	= $ARGV[1];
 # Define variables used by script:
 my $file_key	= "~/aspera.openssh";
 my $file_ncbi	= "~/aspera.path";
-my $dir_fastq	= "/home/mdh/shared/HAI_QC/.upload/fastq";
-my $dir_fasta   = "/home/mdh/shared/HAI_QC/.upload/fasta";
+my $dir_fastq	= "/projects/standard/mdh/shared/HAI_QC/.upload/fastq";
+my $dir_fasta   = "/projects/standard/mdh/shared/HAI_QC/.upload/fasta";
 
 # Convert file paths to realpath:
 $file_key	= `realpath $file_key`;

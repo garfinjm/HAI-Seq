@@ -69,7 +69,7 @@ singularity \
 	-B ${workdir}:${workdir} \
 	-B ${KRAKEN_DB}:${KRAKEN_DB} \
 	--pwd ${workdir} \
-	/home/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-kraken2-2.1.2-no-db.sif \
+	/projects/standard/mdh/shared/software_modules/HAI_QC/1.2/singularity/staphb-kraken2-2.1.2-no-db.sif \
 	kraken2 \
 	--db $KRAKEN_DB \
 	--threads $THREADS \
